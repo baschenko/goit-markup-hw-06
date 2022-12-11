@@ -111,6 +111,7 @@ body {
   border: 0;
   padding: 0;
   margin: -1px;
+  opacity: 0;
 }
 
 /* HEADER */
@@ -574,7 +575,72 @@ body {
   display: block;
 }
 
+.footer-form {
+  margin-left: auto;
+}
+
+.footer-form-action {
+  display: flex;
+}
+
+.footer-input {
+  padding: 15px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  border-radius: 4px;
+
+  background-color: transparent;
+
+  width: 358px;
+  margin-right: 12px;
+}
+
+.footer-input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-form-btn {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.88;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  color: var(--white-color);
+
+  background-color: var(--accent-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  padding: 10px 28px;
+  max-width: 200px;
+  width: 100%;
+  cursor: pointer;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-form-btn:hover,
+.footer-form-btn:focus {
+  background-color: var(--btn-active-color);
+}
+
+.footer-input-icon {
+  fill: var(--white-color);
+  margin-left: 10px;
+}
+
 /* Modal Window */
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -582,30 +648,32 @@ body {
 
   width: 100%;
   height: 100%;
-
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scaleY(1);
 
-  min-width: 528px;
-  min-height: 581px;
-
+  max-width: 528px;
+  width: 100%;
+  max-height: 581px;
   background-color: var(--white-color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  padding: 40px;
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scaleY(0);
 }
 
 .close-btn {
@@ -615,23 +683,173 @@ body {
 
   padding: 6px;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: var(--white-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  color: #000;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--second-logo-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .close-btn:hover,
 .close-btn:focus {
-  background-color: var(--accent-color);
-  color: var(--white-color);
+  color: var(--accent-color);
 }
 
 .icon-close {
   fill: currentColor;
   display: block;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-heading {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: var(--secodary-text-color);
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.modal-input-group {
+  margin-bottom: 10px;
+}
+
+.modal-input-wrapper {
+  position: relative;
+}
+
+.modal-input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  padding-left: 42px;
+  color: var(--secodary-text-color);
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-input:hover,
+.modal-input:focus {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.modal-input:hover + svg,
+.modal-input:focus + svg {
+  fill: var(--accent-color);
+}
+
+.modal-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-input-group label {
+  display: block;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+  color: var(--primary-text-color);
+  margin-bottom: 4px;
+}
+
+.modal-text {
+  max-width: 448px;
+  width: 100%;
+  height: 120px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  resize: none;
+  padding: 12px 16px;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-text:hover,
+.modal-text:focus {
+  border: 1px solid var(--accent-color);
+}
+
+.modal-text::placeholder {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+  padding-bottom: 20px;
+}
+
+.modal-input:focus-visible,
+.modal-text:focus-visible,
+.modal-politic-check:focus+label::before,
+.modal-link:focus {
+  outline: var(--accent-color) auto 1px;
+}
+
+.modal-checkbox {
+  margin-bottom: 30px;
+}
+
+.modal-politic-lable {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.modal-politic-lable::before {
+  content: '';
+  width: 16px;
+  height: 15px;
+  border: 2px solid var(--secodary-text-color);
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.modal-politic-check:hover + label::before {
+  border-color: var(--accent-color);
+}
+
+.modal-politic-check:checked + label::before {
+  border: none;
+  background-image: url(../images/check.svg);
+}
+
+.modal-link {
+  color: var(--accent-color);
+  margin-left: 5px;
+}
+
+.forma-btn {
+  padding: 10px 52px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.88;
+  letter-spacing: 0.06em;
+  color: var(--white-color);
+  background-color: var(--accent-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: none;
+  margin: 0 auto;
+  display: block;
+  height: 50px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.forma-btn:hover,
+.forma-btn:focus {
+  background-color: var(--btn-active-color);
 }
 
 /* Portfolio */
@@ -735,7 +953,7 @@ body {
 }
 
 .portfolio-link:hover .portfolio-action::before,
- .portfolio-link:focus .portfolio-action::before {
+.portfolio-link:focus .portfolio-action::before {
   opacity: 1;
   transform: translateY(0);
 }
